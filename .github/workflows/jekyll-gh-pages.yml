@@ -37,7 +37,7 @@ jobs:
           BRANCH_TO_CLONE: 'demo'
         run: |
           ssh-keyscan -t rsa gitee.com >> ~/.ssh/known_hosts
-          rm -rf .
+          rm -rf LICENSE README.md
           git clone git@gitee.com:${REPO_TO_CLONE}.git --branch ${BRANCH_TO_CLONE} .
       - name: Setup Pages
         uses: actions/configure-pages@v5
