@@ -3,8 +3,7 @@ name: Deploy Jekyll with GitHub Pages dependencies preinstalled
 
 on:
   # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+  workflow_dispatch
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -28,6 +27,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: SSH Private Key Setup
+        uses: webfactory/ssh-agent@v0.2.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Clone
+        env:
+          REPO_TO_CLONE: 'tqybt/minimalist-resume'
+          BRANCH_TO_CLONE: 'demo'
+        run: |
+          git clone git@gitee.com:${REPO_TO_CLONE}.git --branch ${BRANCH_TO_CLONE}
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Build with Jekyll
