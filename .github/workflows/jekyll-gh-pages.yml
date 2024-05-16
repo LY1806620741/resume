@@ -38,13 +38,13 @@ jobs:
         run: |
           ssh-keyscan -t rsa gitee.com >> ~/.ssh/known_hosts
           git clone git@gitee.com:${REPO_TO_CLONE}.git --branch ${BRANCH_TO_CLONE}
-          cd minimalist-resume
+          ls
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./
+          source: ./minimalist-resume/
           destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
